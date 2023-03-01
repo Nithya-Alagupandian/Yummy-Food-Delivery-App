@@ -1,9 +1,49 @@
+import 'package:firebase_dynamic_links/firebase_dynamic_links.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/app_bar_widget.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
-class GenieScreen extends StatelessWidget {
+class GenieScreen extends StatefulWidget {
   const GenieScreen({super.key});
+
+  @override
+  GenieScreenState createState() => GenieScreenState();
+}
+
+class GenieScreenState extends State<GenieScreen> {
+  late DateTime _startTime;
+  late String _screenName;
+
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start timer and set screen name when screen is opened
+    _startTime = DateTime.now();
+    _screenName = "Genie Screen";
+    _analytics.setCurrentScreen(screenName: _screenName);
+
+    // createDynamicLink2();
+
+    //handleDynamicLinks();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    // Stop timer and calculate screen duration when screen is closed
+    final duration = DateTime.now().difference(_startTime);
+    _analytics.logEvent(
+      name: 'screen_view',
+      parameters: <String, dynamic>{
+        'screen_name': _screenName,
+        'screen_duration': duration.inSeconds,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -203,7 +243,11 @@ class GenieScreen extends StatelessWidget {
                               height: 50, // <-- Your height
 
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  print('CREATING DYNAMIC LINK...........');
+                                  //createDynamicLink();
+                                  createDynamicLink2();
+                                },
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.red),
                                 child: Row(
@@ -258,3 +302,70 @@ class GenieScreen extends StatelessWidget {
         ));
   }
 }
+
+Future<Uri> createDynamicLink() async {
+  final DynamicLinkParameters parameters = DynamicLinkParameters(
+    uriPrefix: 'https://yummyfooddelivery.page.link',
+    //link: Uri.parse('https://www.example.com/'),
+    link: Uri.parse('https://www.example.com/?screen=genie'),
+
+    androidParameters: const AndroidParameters(
+      packageName: 'com.apn.food.yummy_food_delivery',
+      minimumVersion: 1,
+    ),
+  );
+
+  final ShortDynamicLink shortDynamicLink =
+      await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+  final Uri shortUrl = shortDynamicLink.shortUrl;
+
+  print(
+      'getDynamicLink : ${FirebaseDynamicLinks.instance.getDynamicLink(parameters.link)}');
+  print('shortUrl : $shortUrl');
+  return shortUrl;
+}
+
+Future<String> createDynamicLink2() async {
+  final String encodedParamValue = Uri.encodeQueryComponent('genie');
+//final Uri link = Uri.parse('https://yourapp.page.link/yourlink?screen=$encodedParamValue');
+
+  final DynamicLinkParameters parameters = DynamicLinkParameters(
+    uriPrefix: 'https://yummyfooddelivery.page.link',
+    link: Uri.parse('https://www.example.com?screen=$encodedParamValue'),
+    androidParameters: const AndroidParameters(
+      packageName: 'com.apn.food.yummy_food_delivery',
+    ),
+    iosParameters: const IOSParameters(
+      bundleId: 'com.apn.food.yummy_food_delivery',
+      minimumVersion: '1.0.1',
+    ),
+    socialMetaTagParameters: SocialMetaTagParameters(
+      title: 'Example Title',
+      description: 'Example Description',
+      imageUrl: Uri.parse('https://example.com/image.jpg'),
+    ),
+  );
+  print(
+      'FirebaseDynamicLinks.instance.getInitialLink().toString() :::::::::::    ${FirebaseDynamicLinks.instance.getInitialLink().toString()}');
+  final ShortDynamicLink shortLink =
+      await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+  print("shortLink.shortUrl.toString() :::  ${shortLink.shortUrl.toString()}");
+  return shortLink.shortUrl.toString();
+}
+
+/* class DynamicLinkService {
+  Future<Uri> createDynamicLink() async {
+    final DynamicLinkParameters parameters = DynamicLinkParameters(
+      uriPrefix: 'https://yummyfooddelivery.page.link',
+      link: Uri.parse('https://www.example.com/'),
+      androidParameters: const AndroidParameters(
+        packageName: 'com.apn.food.yummy_food_delivery',
+        minimumVersion: 1,
+      ),
+    );
+    var dynamicUrl =
+        await FirebaseDynamicLinks.instance.buildShortLink(parameters);
+    final Uri shortUrl = dynamicUrl.shortUrl;
+    return shortUrl;
+  }
+} */

@@ -1,0 +1,5 @@
+<resources>
+    <array name="firebase_dynamic_links_domains">
+        <item>yummyfooddelivery.page.link</item>
+    </array>
+</resources>

@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "862349918804",
+    "project_id": "yummyfooddeliverypjt",
+    "storage_bucket": "yummyfooddeliverypjt.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862349918804:android:14d93ab21782e42e7ae3c1",
+        "android_client_info": {
+          "package_name": "com.apn.food.yummy_food_delivery"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862349918804-4iqqa15n50th1n1an7lj0uie95elkfd9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBSq-570mZ6IiwfIT4RWOwoYIs2PzQlTR8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862349918804-4iqqa15n50th1n1an7lj0uie95elkfd9.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "862349918804-fshgueehgg7mj42op96100s726q06o7v.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.apn.food.yummyFoodDelivery"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

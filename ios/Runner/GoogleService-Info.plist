@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>862349918804-fshgueehgg7mj42op96100s726q06o7v.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.862349918804-fshgueehgg7mj42op96100s726q06o7v</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAmOj_t52m4Uj9y_vHwluYe1ax72OppJ3U</string>
+	<key>GCM_SENDER_ID</key>
+	<string>862349918804</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.apn.food.yummyFoodDelivery</string>
+	<key>PROJECT_ID</key>
+	<string>yummyfooddeliverypjt</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yummyfooddeliverypjt.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:862349918804:ios:0f48689687ebbed67ae3c1</string>
+</dict>
+</plist>

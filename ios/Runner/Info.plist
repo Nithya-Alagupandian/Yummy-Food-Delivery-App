@@ -47,5 +47,18 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+
+
+	<!-- Add Firebase Dynamic Links metadata -->
+    <key>FirebaseDynamicLinksCustomDomains</key>
+    <array>
+        <string>yummyfooddelivery.page.link</string>
+    </array>
+    <key>FirebaseAppDelegateProxyEnabled</key>
+    <false/>
+    <key>FirebaseAnalyticsCollectionEnabled</key>
+    <true/>
+
+
 </dict>
 </plist>

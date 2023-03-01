@@ -4,9 +4,44 @@ import '../widgets/app_bar_widget.dart';
 import '../widgets/card_grid_widget.dart';
 import '../widgets/slider_widget.dart';
 import 'filter_screen.dart';
+import 'package:firebase_analytics/firebase_analytics.dart';
 
-class InstamartScreen extends StatelessWidget {
+class InstamartScreen extends StatefulWidget {
   const InstamartScreen({super.key});
+
+  @override
+  InstamartScreenState createState() => InstamartScreenState();
+}
+
+class InstamartScreenState extends State<InstamartScreen> {
+  late DateTime _startTime;
+  late String _screenName;
+
+  final FirebaseAnalytics _analytics = FirebaseAnalytics.instance;
+
+  @override
+  void initState() {
+    super.initState();
+    // Start timer and set screen name when screen is opened
+    _startTime = DateTime.now();
+    _screenName = "Instamart Screen";
+    _analytics.setCurrentScreen(screenName: _screenName);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+
+    // Stop timer and calculate screen duration when screen is closed
+    final duration = DateTime.now().difference(_startTime);
+    _analytics.logEvent(
+      name: 'screen_view',
+      parameters: <String, dynamic>{
+        'screen_name': _screenName,
+        'screen_duration': duration.inSeconds,
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
